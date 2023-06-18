@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return view('admin.admin_dashboard');
 });
+Route::get('signUp', function () {
+    return view('admin.signUp');
+});
+Route::get('signIn', function () {
+    return view('admin.signIn');
+});
