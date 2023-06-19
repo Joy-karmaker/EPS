@@ -46,7 +46,7 @@
                 <div class="card-body">
                   <form role="form">
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Name</label>
+                      <label class="form-label">Full Name</label>
                       <input type="text" class="form-control">
                     </div>
                     <div class="input-group input-group-outline mb-3">
@@ -56,6 +56,34 @@
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
                       <input type="password" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Country</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">City/State</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Street/Road</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Address</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Phone Number</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Phone Number</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Image</label>
+                      <input type="file" class="form-control">
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>

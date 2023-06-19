@@ -19,9 +19,19 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return view('admin.admin_dashboard');
 });
+
 Route::get('signUp', function () {
     return view('admin.signUp');
 });
+
 Route::get('signIn', function () {
     return view('admin.signIn');
+});
+
+Route::get('/clear_cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('route:clear');
+    $exitCode = Artisan::call('view:clear');
+    $exitCode = Artisan::call('config:cache');
+    return '<h1>Clear Config cleared</h1>';
 });
