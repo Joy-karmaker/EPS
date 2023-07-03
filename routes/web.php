@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,22 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('dashboard', function () {
-    return view('admin.admin_dashboard');
-});
 
-Route::get('signUp', function () {
-    return view('admin.signUp');
-});
+ Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+ Route::get('index', [AdminController::class, 'index'])->name('admins.admin_profile');
 
-Route::get('signIn', function () {
-    return view('admin.signIn');
-});
 
-Route::get('/clear_cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode = Artisan::call('route:clear');
-    $exitCode = Artisan::call('view:clear');
-    $exitCode = Artisan::call('config:cache');
-    return '<h1>Clear Config cleared</h1>';
-});
+Route::resource('admins', AdminController::class);
