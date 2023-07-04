@@ -106,8 +106,14 @@
                             <strong>Image:</strong>
                             <input type="file" name="image" class="form-control" >
                             <input type="hidden" name="existing_image" class="form-control" value ={{ $admin->image }}>
-                            <div >
-                                <img src="/Image/{{ $admin->image }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                            <div style>
+                                @if ($admin->image!='')
+                                <img src="/Image/{{ $admin->image }}" alt="profile_image" >
+
+                                @else
+                                <img src="/Image/demoProfile.jpg" alt="profile_image" height="5%" width="15%">
+                                @endif
+
                             </div>
                         </div>
                     </div>

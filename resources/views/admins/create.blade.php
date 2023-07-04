@@ -41,7 +41,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Email:</strong>
-                    <input type="email" name="email" class="form-control" placeholder="Email">
+                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"  placeholder="Email">
                     @error('email')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -51,7 +51,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Password:</strong>
-                    <input type="password" name="password" class="form-control" placeholder=" Password">
+                    <input type="password" name="password" class="form-control" value="{{ old('password') }}"  placeholder=" Password">
                     @error('password')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -61,10 +61,10 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-select">
                     <strong>Country</strong><br>
-                    <select class="form-select" name="country_id">
+                    <select class="form-select" name="country_id"  value="{{ old('country_id') }}" >
                         <option value="">Select One</option>
                         @foreach($countries as $country)
-                     <option value={{$country->id}}>{{$country->name}}</option>
+                     <option value={{$country->id}} {{ old('country_id') == $country->id ? 'selected' : '' }}>{{$country->name}}</option>
                     @endforeach
                     </select>
                     @error('country_id')
@@ -75,21 +75,21 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>City:</strong>
-                        <textarea name="city" class="form-control" placeholder="City"> </textarea>
+                        <textarea name="city" class="form-control"   placeholder="City"> {{ old('city') }}</textarea>
 
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Street:</strong>
-                        <textarea name="street" class="form-control" placeholder="Street/Road"> </textarea>
+                        <textarea name="street" class="form-control" placeholder="Street/Road"> {{ old('street') }} </textarea>
 
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Address:</strong>
-                        <textarea name="address" class="form-control" placeholder="Address"> </textarea>
+                        <textarea name="address" class="form-control" placeholder="Address">{{ old('address') }} </textarea>
                         @error('address')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -98,7 +98,7 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Phone:</strong>
-                        <input type="text" name="phone_no" class="form-control" placeholder="Phone Number">
+                        <input type="text" name="phone_no" class="form-control" value="{{ old('phone_no') }}"  placeholder="Phone Number">
                         @error('phone_no')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -108,8 +108,6 @@
                     <div class="form-group">
                         <strong>Image:</strong>
                         <input type="file" name="image" class="form-control"/>
-
-
 
                     </div>
                 </div>
