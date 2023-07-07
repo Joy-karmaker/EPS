@@ -3,149 +3,143 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add Company Form - Laravel 9 CRUD</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Admin Registration Form</title>
+    <link href="{{ asset('admin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+    {{-- <link id="pagestyle" href="../admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> --}}
+    {{-- <link href="../admin/bootstrap/css/bootstrap.min.css"> --}}
+
+
 </head>
 
 <body>
-    <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left mb-2">
-                    <h2>Add Admin</h2>
-                </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('admins.index') }}"> Back</a>
+    <div class="container-fluid my-2 py-2">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8 margin-tb ">
 
-                </div>
+                <div class="card">
+                    <div class="card-body" style="text-align: center">
+                       <div ><h4> Admin Registration Form </h4></div>
+
+                    </div>
+                  </div>
+
             </div>
         </div>
-        @if(session('status'))
-        <div class="alert alert-success mb-1 mt-1">
-            {{ session('status') }}
-        </div>
-        @endif
+    </div>
+            @if(session('status'))
+            <div class="alert alert-success mb-1 mt-1">
+                {{ session('status') }}
+            </div>
+            @endif
         <form action="{{ route('admins.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Full Name:</strong>
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required placeholder="Full Name">
-                    @error('name')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
+            <div class="container-fluid my-2 py-2">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8 margin-tb ">
+                        <div class="card my-2 ">
+                            <div class="card-body" style="text-align: center">
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Full Name:</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="name" class="form-control" placeholder="Full Name" value="{{ old('name') }}">
+                                        @error('name')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <label class="col-sm-2 col-form-label">Phone No</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="phone_no" class="form-control" value="{{ old('phone_no') }}"  placeholder="Phone Number" >
+                                        @error('phone_no')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group my-2 row">
+                                    <label class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
+                                        @error('email')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <label class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-4">
+                                        <input type="password" name="password" class="form-control" value="{{ old('password') }}"  placeholder=" Password" >
+                                        @error('password')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group my-2 row">
+                                    <label class="col-sm-2 col-form-label">Country</label>
+                                    <div class="col-sm-4">
+                                       <select class="form-select" name="country_id"  value="{{ old('country_id') }}" >
+                                        <option value="">Select One</option>
+                                        @foreach($countries as $country)
+                                        <option value={{$country->id}} {{ old('country_id') == $country->id ? 'selected' : '' }}>{{$country->name}}</option>
+                                       @endforeach
+                                    </select>
+                                       @error('country_id')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                      @enderror
+                                  </div>
+
+                                <label class="col-sm-2 col-form-label">City</label>
+                                <div class="col-sm-4">
+                                    <textarea name="city" class="form-control"   placeholder="City"> {{ old('city') }}</textarea>
+                                </div>
+                            </div>
+                                <div class="form-group my-2 row">
+                                    <label class="col-sm-2 col-form-label">Street</label>
+                                    <div class="col-sm-4">
+                                        <textarea name="street" class="form-control" placeholder="Street/Road"> {{ old('street') }} </textarea>
+                                    </div>
+                                    <label class="col-sm-2 col-form-label">Address</label>
+                                    <div class="col-sm-4">
+                                        <textarea name="address" class="form-control" placeholder="Address">{{ old('address') }} </textarea>
+                                        @error('address')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                    @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group my-2 row">
+                                    <label class="col-sm-2 col-form-label">Upload Image</label>
+                                    <div class="col-sm-4">
+                                        <input type="file" name="image" class="form-control"/>
+                                    </div>
+
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+                                <div class="form-group my-2 row">
+                                    <div class="col-sm-4">
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <button type="submit" class="btn btn-primary ml-3">Submit</button>
+
+                                            <a class="btn btn-outline-primary" href="{{ route('admins.index') }}"> Back</a>
+
+                                        </div>
+                                    </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Email:</strong>
-                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"  placeholder="Email">
-                    @error('email')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Password:</strong>
-                    <input type="password" name="password" class="form-control" value="{{ old('password') }}"  placeholder=" Password">
-                    @error('password')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-select">
-                    <strong>Country</strong><br>
-                    <select class="form-select" name="country_id"  value="{{ old('country_id') }}" >
-                        <option value="">Select One</option>
-                        @foreach($countries as $country)
-                     <option value={{$country->id}} {{ old('country_id') == $country->id ? 'selected' : '' }}>{{$country->name}}</option>
-                    @endforeach
-                    </select>
-                    @error('country_id')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>City:</strong>
-                        <textarea name="city" class="form-control"   placeholder="City"> {{ old('city') }}</textarea>
-
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Street:</strong>
-                        <textarea name="street" class="form-control" placeholder="Street/Road"> {{ old('street') }} </textarea>
-
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Address:</strong>
-                        <textarea name="address" class="form-control" placeholder="Address">{{ old('address') }} </textarea>
-                        @error('address')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Phone:</strong>
-                        <input type="text" name="phone_no" class="form-control" value="{{ old('phone_no') }}"  placeholder="Phone Number">
-                        @error('phone_no')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Image:</strong>
-                        <input type="file" name="image" class="form-control"/>
-
-                    </div>
-                </div>
-
-                {{-- <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" name="image" class="form-control"/>
-
-                    <img src="" alt="image" />
-                </div> --}}
-            {{-- <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-select">
-                    <strong>Program Name</strong><br>
-                    <select class="form-select" name="program_id">
-                        <option value="0">Select One</option>
-                        @foreach($programs as $program)
-                     <option value={{$program->id}}>{{$program->name}}</option>
-                    @endforeach
-                    </select>
-                </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-select">
-                        <strong>Event Name</strong><br>
-                        <select class="form-select" name="event_id">
-                            <option value="0">Select One Event</option>
-                            @foreach($events as $event)
-                         <option value={{$event->id}}>{{$event->name}}</option>
-                        @endforeach
-                        </select>
-                    </div>
-                    </div> --}}
-
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
-            </div>
         </form>
 
 </body>
 
 </html>
+<script src="../admin/js/core/popper.min.js"></script>
+<script src="../admin/js/core/bootstrap.min.js"></script>
+<script src="../admin/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../admin/js/plugins/smooth-scrollbar.min.js"></script>

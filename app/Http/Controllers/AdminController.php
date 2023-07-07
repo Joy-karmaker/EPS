@@ -10,8 +10,22 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $admins = Admin::orderBy('id','desc')->first();
+        //$admins = Admin::orderBy('id','desc')->first();
         // dd($admins);
+
+        $admins= DB::table('admins as u')->select(
+            'c.name as country_name',
+            'u.name',
+            'u.email',
+            'u.address',
+            'u.phone_no',
+            'u.street',
+            'u.image',
+            'u.id',
+            'u.city'
+        )
+        ->leftjoin('ref_country as c', 'c.id', '=', 'u.country_id')
+        ->orderBy('u.id','desc')->first();
         return view('admins.admin_profile', compact('admins'));
     }
 
@@ -135,7 +149,7 @@ class AdminController extends Controller
 
 
     }
-
+    
 
     public function destroy(Admin $admin)
     {
