@@ -11,7 +11,7 @@
       <div class="col-auto">
         <div class="avatar avatar-xl position-relative">
             @if ($admins->image!='')
-            <img src="/Image/{{ $admins->image }}" alt="profile_image" height="50px" width="150px">
+            <img src="/Image/{{ $admins->image }}" alt="profile_image" height="100px" width="300px">
 
             @else
             <img src="/Image/demoProfile.jpg" alt="profile_image" height="25%" width="50%">
@@ -26,7 +26,7 @@
 
           </h5>
           <p class="mb-0 font-weight-normal text-sm">
-            CEO / Co-Founder
+            Admin
           </p>
         </div>
       </div>
@@ -39,17 +39,19 @@
           <div class="card card-plain h-100">
             <div class="card-header pb-0 p-3">
               <div class="row">
+                <a href="{{ route('admins.create') }}">Create Admin
+                    <i class="fas fa-user-plus text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Profile"></i>
+                </a>
 
-                <div class="col-md-4 text-end">
-                  <a href="{{ route('admins.edit',$admins->id) }}">
+                <a href="{{ route('admins.edit',$admins->id) }}">Edit Admin
                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                   </a>
-                  <a href="{{ route('admins.create') }}">
-                    <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Profile"></i>
+
+                  <a href="{ route('admins.edit') }}">Admin Login
+                    <i class="fa fa-sign-in text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="login"></i>
                 </a>
-                  <a href="#">
-                    <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="login"></i>
-                </a>
+                <div class="col-md-4 text-end">
+
                 </div>
 
               </div>

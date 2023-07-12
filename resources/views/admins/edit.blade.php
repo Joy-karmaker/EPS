@@ -82,7 +82,8 @@
                                     <select class="form-select" name="country_id">
 
                                         @foreach($countries as $country)
-                                     <option value={{$country->id}}>{{$country->name}}</option>
+
+                                     <option value={{$country->id}} {{($country->id==$admin->country_id)?'selected':''}} >{{$country->name}}</option>
                                     @endforeach
                                     </select>
                                 @error('country_id')
