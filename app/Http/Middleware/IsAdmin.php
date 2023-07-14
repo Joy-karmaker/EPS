@@ -19,7 +19,7 @@ class IsAdmin
         if(auth()->user()->is_admin == 1){
             return $next($request);
         }
-        return redirect()->route('/dashboard');
+        return redirect()->route('admin.home');
 
         // return redirect(‘dashboard’)->with(‘error’,"You don't have admin access.");
         // return $next($request);

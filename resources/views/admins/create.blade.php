@@ -124,7 +124,7 @@
                                     <div class="col-sm-4">
                                         <button type="submit" class="btn btn-primary ml-3">Submit</button>
 
-                                            <a class="btn btn-outline-primary" href="{{ route('admins.index') }}"> Back</a>
+                                            <a class="btn btn-outline-primary" href="{{ route('start') }}"> Back</a>
 
                                         </div>
                                     </div>

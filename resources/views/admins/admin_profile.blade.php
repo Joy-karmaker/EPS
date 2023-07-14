@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="card card-body mx-3 mx-md-4 mt-n6">
-    <div class="col-md-12 " style="text-align: center">
+<div class="card card-body ">
+    <div class="col-md-10 " style="text-align: center">
         <h4 class="mb-0">Admin Information</h4>
       </div>
     <div class="row gx-4 mb-2">

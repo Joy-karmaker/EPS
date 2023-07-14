@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Admin;
+//use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +14,7 @@ class AdminController extends Controller
         //$admins = Admin::orderBy('id','desc')->first();
         // dd($admins);
 
-        $admins= DB::table('admins as u')->select(
+        $admins= DB::table('users as u')->select(
             'c.name as country_name',
             'u.name',
             'u.email',
@@ -75,10 +76,10 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $Admin= new Admin();
+        $Admin= new User();
         $Admin->name = $request->input('name');
         $Admin->email = $request->input('email');
-        $Admin->password = $request->input('password');
+        $Admin->password = bcrypt($request->input('password'));
         $Admin->country_id = $request->input('country_id');
         $Admin->address = $request->input('address');
         $Admin->phone_no = $request->input('phone_no');
@@ -92,20 +93,20 @@ class AdminController extends Controller
     }
 
 
-    public function show(Admin $admin)
+    public function show(User $admin)
     {
         return view('admins.show',compact('admin'));
     }
 
 
-    public function edit(Admin $admin)
+    public function edit(User $admin)
     {
         // dd($admin);
         $countries = DB::table('ref_country')->get();
         return view('admins.edit',['countries' =>$countries],compact('admin'));
     }
 
-    public function update(Request $request, Admin $Admin)
+    public function update(Request $request, User $Admin)
     {
         $validator=$request->validate([
             'name' => 'required|string|max:30',
@@ -136,7 +137,7 @@ class AdminController extends Controller
         // $Admin= new Admin();
         $Admin->name = $request->input('name');
         $Admin->email = $request->input('email');
-        $Admin->password = $request->input('password');
+        $Admin->password = bcrypt($request->input('password'));
         $Admin->country_id = $request->input('country_id');
         $Admin->address = $request->input('address');
         $Admin->phone_no = $request->input('phone_no');
@@ -151,7 +152,7 @@ class AdminController extends Controller
     }
     
 
-    public function destroy(Admin $admin)
+    public function destroy(User $admin)
     {
         $admin->delete();
         return redirect()->route('admins.index')->with('success','Admin has been deleted successfully');

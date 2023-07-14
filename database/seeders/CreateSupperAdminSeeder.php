@@ -18,7 +18,7 @@ class CreateSupperAdminSeeder extends Seeder
             [
                'name'=>'Super Admin',
                'email'=>'superadmin@gmail.com',
-                'is_admin'=>'1',
+               'is_admin'=>'1',
                'password'=> bcrypt('123456'),
             ],
         ];

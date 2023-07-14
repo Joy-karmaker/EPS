@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('start');
 
  Route::get('/dashboard', [DashboardController::class, 'dashboard']);
  Route::get('/login', [LoginController::class, 'login']);
@@ -28,6 +29,6 @@ Route::resource('admins', AdminController::class);
 
 
 Auth::routes();
-Route::get('/dashboard', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.home')->middleware('is_admin');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

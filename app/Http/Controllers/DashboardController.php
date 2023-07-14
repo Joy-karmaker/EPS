@@ -11,6 +11,7 @@ class DashboardController extends Controller
     {
         // $admins = Admin::orderBy('id','desc')->paginate(5);
         // echo "<pre>";print_r($admins);exit;
-        return view('admins.admin_dashboard');
+        // return view('admins.admin_dashboard');
+        return view('admins/admin_dashboard');
     }
 }
