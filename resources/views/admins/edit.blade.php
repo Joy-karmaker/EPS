@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Admin Registration Form</title>
     <link href="{{ asset('admin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
     {{-- <link id="pagestyle" href="../admin/css/material-dashboard.css?v=3.1.0" rel="stylesheet" /> --}}
     {{-- <link href="{{ asset('/')}}/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> --}}
     {{-- <link href="../admin/bootstrap/css/bootstrap.min.css"> --}}
@@ -51,12 +52,16 @@
                                     @enderror
                                 </div>
                                 <label class="col-sm-2 col-form-label">Phone No</label>
-                                <div class="col-sm-4">
+                                <!-- <div class="col-sm-4">
                                     <input type="text" name="phone_no" class="form-control" value="{{ $admin->phone_no}}"  placeholder="Phone Number" >
                                     @error('phone_no')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                </div> -->
+
+                                <div class="col-sm-4">
+                                    <input id="phone_no" type="tel" class="form-control" value="{{ $admin->phone_no}}"  placeholder="Phone Number"><span id="valid-msg" class="hide"></span><span id="error-msg" class="hide"></span>
+                                    </div>
                             </div>
 
                             <div class="form-group my-2 row">
@@ -146,12 +151,57 @@
                 </div>
             </div>
         </div>
-
-
-
-
         </form>
     </div>
 </body>
-
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+<script>
+  var input = document.querySelector("#phone_no");
+
+  window.intlTelInput(input, {
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+  });
+</script>
+
+<script>
+    const input_ph = document.querySelector("#phone_no");
+    const errorMsg = document.querySelector("#error-msg");
+    const validMsg = document.querySelector("#valid-msg");
+
+    // here, the index maps to the error code returned from getValidationError - see readme
+    const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    // initialise plugin
+    const iti = window.intlTelInput(input_ph, {
+    utilsScript: "/intl-tel-input/js/utils.js?1687509211722"
+    });
+
+    const reset = () => {
+    input_ph.classList.remove("error");
+    errorMsg.innerHTML = "";
+    errorMsg.classList.add("hide");
+    validMsg.classList.add("hide");
+    };
+
+    // on blur: validate
+    input_ph.addEventListener('blur', () => {
+    reset();
+    if (input_ph.value.trim()) {
+        if (iti.isValidNumber()) {
+        validMsg.classList.remove("hide");
+        } else {
+        input_ph.classList.add("error");
+        const errorCode = iti.getValidationError();
+        errorMsg.innerHTML = errorMap[errorCode];
+        errorMsg.classList.remove("hide");
+        }
+    }
+    });
+    
+
+    // on keyup / change flag: reset
+    input_ph.addEventListener('change', reset);
+    input_ph.addEventListener('keyup', reset);
+</script>

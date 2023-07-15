@@ -52,16 +52,14 @@ class AdminController extends Controller
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:6',
             'country_id' => 'required',
-            'address' => 'required',
-            'phone_no' => 'required|max:11|min:11'
+            'address' => 'required'
         ]
         , [
             'country_id.required' => 'Select Country Name.',
             'name.required' => 'Please Enter Full Name.',
             'email.required' => 'Please Enter Your Email.',
             'password.required' => 'Please Enter Your Password.',
-            'address.required' => 'Please Enter Address.',
-            'phone_no.required' => 'Please Enter Phone no.',
+            'address.required' => 'Please Enter Address.'
         ]);
 
         $imageName="";
@@ -113,16 +111,14 @@ class AdminController extends Controller
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:6',
             'country_id' => 'required',
-            'address' => 'required',
-            'phone_no' => 'required|max:11|min:11'
+            'address' => 'required'
         ]
         , [
             'country_id.required' => 'Select Country Name.',
             'name.required' => 'Please Enter Full Name.',
             'email.required' => 'Please Enter Your Email.',
             'password.required' => 'Please Enter Your Password.',
-            'address.required' => 'Please Enter Address.',
-            'phone_no.required' => 'Please Enter Phone no.',
+            'address.required' => 'Please Enter Address.'
         ]);
 
 

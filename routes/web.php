@@ -20,13 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('start');
 
- Route::get('/dashboard', [DashboardController::class, 'dashboard']);
- Route::get('/login', [LoginController::class, 'login']);
- Route::get('index', [AdminController::class, 'index'])->name('admins.admin_profile');
+Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+//Route::get('/login', [LoginController::class, 'login']);
+Route::get('index', [AdminController::class, 'index'])->name('admins.admin_profile');
 
 
 Route::resource('admins', AdminController::class);
-
 
 Auth::routes();
 Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.home')->middleware('is_admin');
