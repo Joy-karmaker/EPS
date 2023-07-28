@@ -3,9 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin Registration Form</title>
+    <title>Users Registration Form</title>
     <link href="{{ asset('admin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{ asset('admin/bootstrap/css/intlInput.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
     {{-- <link id="pagestyle" href="../admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> --}}
     {{-- <link href="../admin/bootstrap/css/bootstrap.min.css"> --}}
@@ -20,7 +19,7 @@
 
                 <div class="card">
                     <div class="card-body" style="text-align: center">
-                       <div ><h4> Admin Registration Form </h4></div>
+                       <div ><h4> User Registration Form </h4></div>
 
                     </div>
                   </div>
@@ -33,7 +32,7 @@
                 {{ session('status') }}
             </div>
             @endif
-        <form action="{{ route('admins.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('users.storeUser') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="container-fluid my-2 py-2">
@@ -79,20 +78,21 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group my-2 row">
-                                    <label class="col-sm-2 col-form-label">Country</label>
-                                    <div class="col-sm-4">
-                                       <select class="form-select" name="country_id"  value="{{ old('country_id') }}" >
-                                        <option value="">Select One</option>
-                                        @foreach($countries as $country)
-                                        <option value={{$country->id}} {{ old('country_id') == $country->id ? 'selected' : '' }}>{{$country->name}}</option>
-                                       @endforeach
-                                    </select>
-                                       @error('country_id')
-                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                      @enderror
-                                  </div>
 
+                                <div class="form-group my-2 row">
+
+                                  <label class="col-sm-2 col-form-label">Country</label>
+                                  <div class="col-sm-4">
+                                     <select class="form-select" name="country_id"  value="{{ old('country_id') }}" >
+                                      <option value="">Select One</option>
+                                      @foreach($countries as $country)
+                                      <option value={{$country->id}} {{ old('country_id') == $country->id ? 'selected' : '' }}>{{$country->name}}</option>
+                                     @endforeach
+                                  </select>
+                                     @error('country_id')
+                                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <label class="col-sm-2 col-form-label">City</label>
                                 <div class="col-sm-4">
                                     <textarea name="city" class="form-control"   placeholder="City"> {{ old('city') }}</textarea>
