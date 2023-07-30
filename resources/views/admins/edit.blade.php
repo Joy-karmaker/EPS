@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Update Admin Profile</title>
+    <title>Admin Registration Form</title>
     <link href="{{ asset('admin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
     {{-- <link id="pagestyle" href="../admin/css/material-dashboard.css?v=3.1.0" rel="stylesheet" /> --}}
@@ -19,7 +19,7 @@
 
                 <div class="card">
                     <div class="card-body" style="text-align: center">
-                       <div ><h4> Update Admin Profile </h4></div>
+                       <div ><h4> Admin Registration Form </h4></div>
 
                     </div>
                   </div>
@@ -32,11 +32,8 @@
             {{ session('status') }}
         </div>
         @endif
-        <form action="{{ route('admins.update',$admin->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admins.updateAdmin',['id' => $admin->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
-
-
         <div class="container-fluid my-2 py-2">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8 margin-tb ">
@@ -60,7 +57,7 @@
                                 </div> -->
 
                                 <div class="col-sm-4">
-                                    <input id="phone_no" type="tel" class="form-control" value="{{ $admin->phone_no}}"  placeholder="Phone Number"><span id="valid-msg" class="hide"></span><span id="error-msg" class="hide"></span>
+                                    <input id="phone_no" name="phone_no" type="tel" class="form-control" value="{{ $admin->phone_no}}"  placeholder="Phone Number"><span id="valid-msg" class="hide"></span><span id="error-msg" class="hide"></span>
                                     </div>
                             </div>
 
@@ -122,10 +119,10 @@
                             <input type="hidden" name="existing_image" class="form-control" value ={{ $admin->image }}>
                             <div >
                                 @if ($admin->image!='')
-                                <img src="/Image/{{ $admin->image }}" alt="profile_image" height="10%" width="30%">
+                                <img src="/Image/{{ $admin->image }}" alt="profile_image" height="30" width="80">
 
                                 @else
-                                <img src="/Image/demoProfile.jpg" alt="profile_image" >
+                                <img src="/Image/demoProfile.jpg" alt="profile_image" height="30" width="80" >
                                 @endif
 
                             </div>

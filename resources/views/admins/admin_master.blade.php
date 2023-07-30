@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +75,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin pages</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="{{ route('admins.index') }}">
+            <a class="nav-link text-white " href="{{ route('admins.profile') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -88,13 +87,14 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{ route('users.userProfile') }}">
+          <a class="nav-link text-white " href="../pages/profile.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">User Profile</span>
           </a>
         </li>
+
       </ul>
     </div>
 
@@ -105,10 +105,10 @@
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li ><a class="opacity-5 text-dark" href="javascript:;"></a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page"></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0"></h6>
+          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
         {{-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -179,11 +179,11 @@
             </li>
             <li class="nav-item d-flex align-items-center">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{-- {{ Auth::user()->name }} --}}
+                                    {{ Auth::guard('admin')->user()->name }}
                                 </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('logout') }}"
+                <a class="dropdown-item" href="{{ route('admins.login') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}

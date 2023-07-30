@@ -93,31 +93,17 @@ class UsersController extends Controller
 
     public function editUser( $id )
     {
-
-        $user= DB::table('users as u')->select(
-            'c.name as country_name',
-            'u.name',
-            'u.email',
-            'u.address',
-            'u.phone_no',
-            'u.street',
-            'u.image',
-            'u.id',
-            'u.city'
-        )
-        ->leftjoin('ref_country as c', 'c.id', '=', 'u.country_id')
-        ->where('u.id',$id)
-        ->orderBy('u.id','asc');
+        $user = User::find($id);
 
         $countries = DB::table('ref_country')->get();
         return view('users.edit',['countries' =>$countries,'user'=>$user]);
     }
 
-    public function updateUser(Request $request, User $User)
+    public function updateUser(Request $request, $id)
     {
+
         $validator=$request->validate([
             'name' => 'required|string|max:30',
-            'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:6',
             'country_id' => 'required',
             'address' => 'required'
@@ -125,7 +111,6 @@ class UsersController extends Controller
         , [
             'country_id.required' => 'Select Country Name.',
             'name.required' => 'Please Enter Full Name.',
-            'email.required' => 'Please Enter Your Email.',
             'password.required' => 'Please Enter Your Password.',
             'address.required' => 'Please Enter Address.'
         ]);
@@ -140,8 +125,9 @@ class UsersController extends Controller
             $imageName = $request->input('existing_image');
         }
         // $Admin= new Admin();
+        $User = User::find($id);
         $User->name = $request->input('name');
-        $User->email = $request->input('email');
+        // $User->email = $request->input('email');
         $User->password = bcrypt($request->input('password'));
         $User->country_id = $request->input('country_id');
         $User->address = $request->input('address');
@@ -151,17 +137,34 @@ class UsersController extends Controller
         $User->image = $imageName;
         $User->save();
 
-        return redirect()->route('users.user_profile')->with('success','User Has Been updated successfully');
+        return redirect()->route('users.userProfile')->with('success','User Has Been updated successfully');
 
 
     }
-
-
-
-
-    public function destroy(User $user)
+    public function login()
     {
-        $user->delete();
-        return redirect()->route('users.index')->with('success','Users has been deleted successfully');
+        return view('users.login');
     }
+    public function SaveLogin(Request $request)
+    {
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        if (['email' => $request->email, 'password' => $request->password]) {
+            return redirect()->intended(route('users.userProfile'));
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+
+    // public function destroy(User $user)
+    // {
+    //     $user->delete();
+    //     return redirect()->route('users.index')->with('success','Users has been deleted successfully');
+    // }
 }

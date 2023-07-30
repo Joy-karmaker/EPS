@@ -1,4 +1,4 @@
-@extends('admins.admin_master');
+@extends('master');
 
 @section('content')
 
@@ -43,7 +43,7 @@
                     <i class="fas fa-user-plus text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Profile"></i>
                 </a>
 
-                <a href="{{ route('admins.edit',['id' => $admins->id]) }}">Edit Admin
+                <a href="{{ route('admins.edit',$admins->id) }}">Edit Admin
                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                   </a>
 

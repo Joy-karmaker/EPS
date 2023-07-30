@@ -15,17 +15,20 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('program_id');
-            $table->string('event_id');
-            $table->string('email');
             $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('is_admin')->nullable();
             $table->string('password');
+            $table->string('program_id')->nullable();;
+            $table->string('event_id')->nullable();;
             $table->string('country_id');
-            $table->string('city');
-            $table->string('street');
+            $table->string('city')->nullable();;
+            $table->string('street')->nullable();;
             $table->string('address');
             $table->string('phone_no');
-            $table->string('image');
+            $table->string('image')->nullable();;
+            $table->rememberToken();
             $table->timestamps();
         });
     }
