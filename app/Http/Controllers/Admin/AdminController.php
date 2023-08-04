@@ -182,5 +182,27 @@ class AdminController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+    public function allAdminProfile()
+    {
+        $adminId = Auth::guard('admin')->user()->id;
+
+        $admins= DB::table('admins as a')->select(
+            'c.name as country_name',
+            'a.name',
+            'a.email',
+            'a.address',
+            'a.phone_no',
+            'a.street',
+            'a.image',
+            'a.id',
+            'a.city'
+        )
+        ->leftjoin('ref_country as c', 'c.id', '=', 'a.country_id')
+        ->where('a.id', $adminId)
+        ->orderBy('a.id','asc')->first();
+
+        //dd($admins);
+        return view('admins.allAdminProfile', compact('admins'));
+    }
 
 }

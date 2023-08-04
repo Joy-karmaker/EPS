@@ -28,11 +28,12 @@
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
                     @else
                         <a href="{{ route('users.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">User Log in</a>
+                        <a href="{{ route('users.createUser') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">User Register</a>
 
                         <a href="{{ route('admins.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Admin Log in</a>
-
+                 
                         @if (Route::has('register'))
-                            <a href="{{ route('admins.create') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                            <a href="{{ route('admins.create') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register Admin</a>
                         @endif
                     @endauth
                 </div>

@@ -5,11 +5,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
 class UsersController extends Controller
 {
-    public function userProfile()
+    public function userProfile($id='2')
     {
-// dd('hi');
 
         $users= DB::table('users as u')->select(
             'c.name as country_name',
@@ -23,8 +23,9 @@ class UsersController extends Controller
             'u.city'
         )
         ->leftjoin('ref_country as c', 'c.id', '=', 'u.country_id')
-        ->orderBy('u.id','desc')->first();
-        // dd($users);
+        ->where('u.id', $id)
+        ->where('u.data_status','<>',0)
+        ->orderBy('u.id','asc')->first();
         return view('users.users_profile', compact('users'));
     }
 
@@ -160,11 +161,46 @@ class UsersController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+    public function allUserProfile()
+    {
+        // dd('hi');
+
+        $users= DB::table('users as u')->select(
+            'c.name as country_name',
+            'u.name',
+            'u.email',
+            'u.address',
+            'u.phone_no',
+            'u.street',
+            'u.image',
+            'u.id',
+            'u.city'
+        )
+        ->leftjoin('ref_country as c', 'c.id', '=', 'u.country_id')
+        ->where('data_status','<>',0)
+
+        ->orderBy('u.id','asc')->get();
+        // dd($users);
+        return view('users.allUserProfile', compact('users'));
+    }
+    public function allUserEdit( $id )
+    {
+        $user = User::find($id);
+
+        $countries = DB::table('ref_country')->get();
+        return view('users.allUserEdit',['countries' =>$countries,'user'=>$user]);
+    }
 
 
-    // public function destroy(User $user)
-    // {
-    //     $user->delete();
-    //     return redirect()->route('users.index')->with('success','Users has been deleted successfully');
-    // }
+    public function allUserDelete($id)
+    {
+        DB::table('users')->where('id', $id)->update(['data_status' => '0']);
+        return redirect()->route('users.allUserProfile')->with('success','Users has been deleted successfully');
+    }
+    public function allUserActive($id)
+    {
+        DB::table('users')->where('id', $id)->update(['active_status' => '0']);
+        return redirect()->route('users.allUserProfile')->with('success','Users has been Inactive successfully');
+    }
+
 }

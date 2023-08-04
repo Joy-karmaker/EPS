@@ -21,14 +21,19 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_admin')->nullable();
             $table->string('password');
-            $table->string('program_id')->nullable();;
-            $table->string('event_id')->nullable();;
+            $table->string('program_id')->nullable();
+            $table->string('event_id')->nullable();
             $table->string('country_id');
-            $table->string('city')->nullable();;
-            $table->string('street')->nullable();;
+            $table->string('city')->nullable();
+            $table->string('street')->nullable();
             $table->string('address');
             $table->string('phone_no');
-            $table->string('image')->nullable();;
+            $table->string('active_status')->default('1');
+            $table->string('data_status')->default('1');
+            $table->string('updated_by')->default('1');
+            $table->string('created_by')->default('1');
+            $table->string('delated_by')->default('1');
+            $table->string('image')->default('1');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -36,6 +41,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
      *
      * @return void
      */

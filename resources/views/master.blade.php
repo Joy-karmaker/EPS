@@ -11,16 +11,19 @@
   </title>
   <!--     Fonts and icons     -->
   <link href="{{ asset('admin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+  <link href="{{ asset('admin/bootstrap/dataTables.min.js')}}" rel="stylesheet" />
+  <link href="{{ asset('admin/bootstrap/jquery-3.7.0.js')}}" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
   <!-- Nucleo Icons -->
-  <link href="../admin/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../admin/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{{ asset('admin/css/nucleo-icons.css')}}" rel="stylesheet" />
+  <link href="{{ asset('admin/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="../admin/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="pagestyle" href="{{ asset('admin/css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -31,7 +34,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        {{-- <img src="../admin/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo"> --}}
+        {{-- <img src="{{ asset('admin/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo"> --}}
         <span class="ms-1 font-weight-bold text-white">EPS</span>
       </a>
     </div>
@@ -48,7 +51,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link text-white " href="../pages/rtl.html">
+            <a class="nav-link text-white " href="{{ asset('pages/rtl.html')}}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -56,7 +59,7 @@
             </a>
           </li>
         <li class="nav-item">
-            <a class="nav-link text-white " href="../pages/rtl.html">
+            <a class="nav-link text-white " href="{{ asset('pages/rtl.html')}}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -64,7 +67,7 @@
             </a>
           </li>
         <li class="nav-item">
-            <a class="nav-link text-white " href="../pages/rtl.html">
+            <a class="nav-link text-white " href="{{ asset('pages/rtl.html')}}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -73,7 +76,9 @@
           </li>
 
           <li class="nav-item mt-3">
-            <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin pages</h6>
+            <a href="{{ route('users.allAdminProfile') }}">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin pages</h6>
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white " href="{{ route('admins.index') }}">
@@ -85,7 +90,9 @@
           </li>
 
         <li class="nav-item mt-3">
+            <a href="{{ route('users.allUserProfile') }}">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User pages</h6>
+            </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white " href="{{ route('users.userProfile') }}">
@@ -142,7 +149,7 @@
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       {{-- <div class="my-auto">
-                        <img src="../admin/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="{{ asset('admin/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                       </div> --}}
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -160,7 +167,7 @@
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../admin/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                        <img src="{{ asset('admin/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ')}}">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -202,8 +209,8 @@
     <div class = "container">
         @yield('content')
     </div>
-    <div>
-        <footer class="footer py-5  ">
+    <div style=" position: fixed; height: 20px; bottom: 0px; left: 0px; right: 0px;margin-bottom: 0px;">
+        <footer  class="footer py-5  ">
 
                 <div class="col-lg-6 mb-lg-0 mb-4">
                  footer section
@@ -276,11 +283,11 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../admin/js/core/popper.min.js"></script>
-  <script src="../admin/js/core/bootstrap.min.js"></script>
-  <script src="../admin/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../admin/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../admin/js/plugins/chartjs.min.js"></script>
+  <script src="{{ asset('admin/js/core/popper.min.js')}}"></script>
+  <script src="{{ asset('admin/js/core/bootstrap.min.js')}}"></script>
+  <script src="{{ asset('admin/js/plugins/perfect-scrollbar.min.js')}}"></script>
+  <script src="{{ asset('admin/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="{{ asset('admin/js/plugins/chartjs.min.js')}}"></script>
 
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -294,7 +301,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../admin/js/material-dashboard.min.js?v=3.1.0"></script>
+  <script src="{{ asset('admin/js/material-dashboard.min.js?v=3.1.0')}}"></script>
 </body>
 
 </html>
