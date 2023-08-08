@@ -39,9 +39,7 @@
           <div class="card card-plain h-100">
             <div class="card-header pb-0 p-3">
               <div class="row">
-                <a href="{{ route('users.createUser') }}">Create User
-                    <i class="fas fa-user-plus text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Profile"></i>
-                </a>
+
 
                 <a href="{{ route('users.editUser',['id' => $users->id]) }}">User update
                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="update Profile"></i>

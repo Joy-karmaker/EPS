@@ -1,4 +1,4 @@
-@extends('admins.admin_master');
+@extends('master');
 
 @section('content')
 
@@ -39,17 +39,13 @@
           <div class="card card-plain h-100">
             <div class="card-header pb-0 p-3">
               <div class="row">
-                <a href="{{ route('admins.create') }}">Create Admin
-                    <i class="fas fa-user-plus text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Profile"></i>
-                </a>
+
 
                 <a href="{{ route('admins.edit',['id' => $admins->id]) }}">Edit Admin
                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                   </a>
 
-                  <a href="{ route('admins.edit') }}">Admin Login
-                    <i class="fa fa-sign-in text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="login"></i>
-                </a>
+
                 <div class="col-md-4 text-end">
 
                 </div>

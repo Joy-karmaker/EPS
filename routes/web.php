@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -25,33 +23,42 @@ Route::get('/', function () {
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admins.login');
 Route::post('/admin/SaveLogin', [AdminController::class, 'SaveLogin'])->name('admin.SaveLogin');
 Route::get('/admin/create', [AdminController::class, 'create'])->name('admins.create');
+Route::post('/admin/store', [AdminController::class, 'store'])->name('admins.store');
 //Admin
 Route::middleware(['admin.auth:admin','is_admin'])->group(function(){
     Route::get('/admin/index', [AdminController::class, 'index'])->name('admins.index');
 
 
-    Route::post('/admin/store', [AdminController::class, 'store'])->name('admins.store');
+
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admins.profile');
     Route::get('/admin/edit/{id}', [AdminController::class, 'edit'])->name('admins.edit');
     Route::post('/admin/updateAdmin/{id}', [AdminController::class, 'updateAdmin'])->name('admins.updateAdmin');
-    Route::get('/admin/allAdminProfile', [UsersController::class, 'allAdminProfile'])->name('users.allAdminProfile');
+
+    Route::get('/admin/allAdminProfile', [AdminController::class, 'allAdminProfile'])->name('admins.allAdminProfile');
+    Route::get('/admin/allAdminActive/{id}', [AdminController::class, 'allAdminActive'])->name('admins.allAdminActive');
+    Route::get('/admin/allAdminDelete/{id}', [AdminController::class, 'allAdminDelete'])->name('admins.allAdminDelete');
+    Route::get('/programme/programmeList', [ProgrammeController::class, 'programmeList'])->name('programmes.programmeList');
+    Route::get('/programme/createProgramme', [ProgrammeController::class, 'createProgramme'])->name('programmes.createProgramme');
+    Route::post('/programme/storeProgramme', [ProgrammeController::class, 'saveProgramme'])->name('programmes.storeProgramme');
+    Route::get('/programme/editProgramme/{id}', [ProgrammeController::class, 'editProgramme'])->name('programmes.editProgramme');
+    Route::post('/programme/updateProgramme/{id}', [ProgrammeController::class, 'updateProgramme'])->name('programmes.updateProgramme');
+    Route::get('/programme/deleteProgramme/{id}', [ProgrammeController::class, 'deleteProgramme'])->name('programmes.deleteProgramme');
 });
 
-//users
 Route::get('/users/login', [UsersController::class, 'login'])->name('users.login');
-Route::post('/users/SaveLogin', [UsersController::class, 'SaveLogin'])->name('users.SaveLogin');
-Route::get('/users/userProfile/{id?}', [App\Http\Controllers\UsersController::class, 'userProfile'])->name('users.userProfile');
-Route::get('/users/createUser', [App\Http\Controllers\UsersController::class, 'createUser'])->name('users.createUser');
-Route::post('/users/storeUser', [App\Http\Controllers\UsersController::class, 'storeUser'])->name('users.storeUser');
-// Route::post('/users/create', [App\Http\Controllers\UsersController::class, 'createUser'])->name('users.create');
-Route::get('/users/editUser/{id}', [App\Http\Controllers\UsersController::class, 'editUser'])->name('users.editUser');
-Route::get('/users/allUserDelete/{id}', [App\Http\Controllers\UsersController::class, 'allUserDelete'])->name('users.allUserDelete');
-Route::get('/users/allUserActive/{id}', [App\Http\Controllers\UsersController::class, 'allUserActive'])->name('users.allUserActive');
-Route::post('/users/updateUser/{id}', [App\Http\Controllers\UsersController::class, 'updateUser'])->name('users.updateUser');
-// Route::post('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
-Route::get('/users/allUserProfile', [App\Http\Controllers\UsersController::class, 'allUserProfile'])->name('users.allUserProfile');
-//
+Route::post('/users/SaveLogin', [App\Http\Controllers\UsersController::class, 'SaveLogin'])->name('users.SaveLogin');
+Route::post('/users/storeUser', [UsersController::class, 'storeUser'])->name('users.storeUser');
+Route::get('/users/createUser', [UsersController::class, 'createUser'])->name('users.createUser');
 
+Route::middleware(['auth:user','is_user'])->group(function(){
+
+    Route::get('/users/userProfile/{id?}', [UsersController::class, 'userProfile'])->name('users.userProfile');
+    Route::get('/users/editUser/{id}', [UsersController::class, 'editUser'])->name('users.editUser');
+    Route::get('/users/allUserDelete/{id}', [UsersController::class, 'allUserDelete'])->name('users.allUserDelete');
+    Route::get('/users/allUserActive/{id}', [UsersController::class, 'allUserActive'])->name('users.allUserActive');
+    Route::post('/users/updateUser/{id}', [UsersController::class, 'updateUser'])->name('users.updateUser');
+    Route::get('/users/allUserProfile', [UsersController::class, 'allUserProfile'])->name('users.allUserProfile');
+});
 
 Auth::routes();
 

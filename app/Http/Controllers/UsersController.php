@@ -5,12 +5,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-    public function userProfile($id='2')
-    {
 
+    public function indexUser()
+    {
+        return view('users.user_dashboard');
+    }
+
+    public function userProfile($id=null)
+    {
         $users= DB::table('users as u')->select(
             'c.name as country_name',
             'u.name',
@@ -80,17 +86,9 @@ class UsersController extends Controller
         $User->street = $request->input('street');
         $User->image = $imageName;
         $User->save();
-        // Admin::create($request->post());
-
+    
         return redirect()->route('users.userProfile')->with('success','User has been created successfully.');
     }
-
-
-    // public function show(User $User)
-    // {
-    //     return view('users.show',compact('User'));
-    // }
-
 
     public function editUser( $id )
     {
@@ -125,10 +123,8 @@ class UsersController extends Controller
         }else {
             $imageName = $request->input('existing_image');
         }
-        // $Admin= new Admin();
         $User = User::find($id);
         $User->name = $request->input('name');
-        // $User->email = $request->input('email');
         $User->password = bcrypt($request->input('password'));
         $User->country_id = $request->input('country_id');
         $User->address = $request->input('address');
@@ -148,13 +144,14 @@ class UsersController extends Controller
     }
     public function SaveLogin(Request $request)
     {
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        if (['email' => $request->email, 'password' => $request->password]) {
-            return redirect()->intended(route('users.userProfile'));
+
+        if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = User::where('email', $request->email)->first();
+            return redirect()->intended(route('users.userProfile',['id' => $user->id]));
         }
 
         return back()->withErrors([
@@ -163,8 +160,6 @@ class UsersController extends Controller
     }
     public function allUserProfile()
     {
-        // dd('hi');
-
         $users= DB::table('users as u')->select(
             'c.name as country_name',
             'u.name',

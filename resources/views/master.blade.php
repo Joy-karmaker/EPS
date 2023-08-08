@@ -51,7 +51,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link text-white " href="{{ asset('pages/rtl.html')}}">
+            <a class="nav-link text-white " href="{{ route('programmes.programmeList') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -76,12 +76,12 @@
           </li>
 
           <li class="nav-item mt-3">
-            <a href="{{ route('users.allAdminProfile') }}">
+            <a href="{{ route('admins.allAdminProfile') }}">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin pages</h6>
-            </a>
+                  </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="{{ route('admins.index') }}">
+            <a class="nav-link text-white " href="{{ route('admins.profile') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -186,8 +186,16 @@
             </li>
             <li class="nav-item d-flex align-items-center">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{-- {{ Auth::user()->name }} --}}
-                                </a>
+               {{-- @if(Auth::guard('admin')->check())? {{ Auth::guard('admin')->user()->name }}:{{ Auth::guard('user')->user()->name }}
+                                </a>@endif --}}
+
+                                @auth('admin')
+                                    {{ auth('admin')->user()->name }}
+                                @endauth
+
+                                @auth('user')
+                                    {{ auth('user')->user()->name }}
+                                @endauth
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('logout') }}"

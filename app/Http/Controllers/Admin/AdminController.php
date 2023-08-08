@@ -117,7 +117,7 @@ class AdminController extends Controller
     {
         $validator=$request->validate([
             'name' => 'required|string|max:30',
-            'email' => 'required|string|email|unique:users,email',
+            'email' => 'required|string|email|unique:admins,email',
             'password' => 'required|string|min:6',
             'country_id' => 'required',
             'address' => 'required'
@@ -184,25 +184,34 @@ class AdminController extends Controller
     }
     public function allAdminProfile()
     {
-        $adminId = Auth::guard('admin')->user()->id;
-
-        $admins= DB::table('admins as a')->select(
+        $admins= DB::table('admins as u')->select(
             'c.name as country_name',
-            'a.name',
-            'a.email',
-            'a.address',
-            'a.phone_no',
-            'a.street',
-            'a.image',
-            'a.id',
-            'a.city'
+            'u.name',
+            'u.email',
+            'u.address',
+            'u.phone_no',
+            'u.street',
+            'u.image',
+            'u.id',
+            'u.city'
         )
-        ->leftjoin('ref_country as c', 'c.id', '=', 'a.country_id')
-        ->where('a.id', $adminId)
-        ->orderBy('a.id','asc')->first();
+        ->leftjoin('ref_country as c', 'c.id', '=', 'u.country_id')
+        ->where('data_status','<>',0)
 
-        //dd($admins);
+        ->orderBy('u.id','asc')->get();
+
+
         return view('admins.allAdminProfile', compact('admins'));
+    }
+    public function allAdminActive($id)
+    {
+        DB::table('admins')->where('id', $id)->update(['active_status' => '0']);
+        return redirect()->route('admins.allAdminProfile')->with('success','Admin has been Inactive successfully');
+    }
+    public function allAdminDelete($id)
+    {
+        DB::table('admins')->where('id', $id)->update(['data_status' => '0']);
+        return redirect()->route('admins.allAdminProfile')->with('success','Admin has been deleted successfully');
     }
 
 }
