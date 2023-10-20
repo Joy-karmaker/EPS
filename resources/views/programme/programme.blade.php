@@ -1,4 +1,4 @@
-@extends('master');
+@extends('master')
 
 @section('content')
 
@@ -40,7 +40,9 @@
             @endforeach
 
         </table>
-        <br>
-        <br>
-        {{ $programmes->links() }}
+
+      <div style=" margin-right: 50px;
+      width: 25%;
+      padding: 10px;" > {{ $programmes->links() }}
+      </div>
 @endsection

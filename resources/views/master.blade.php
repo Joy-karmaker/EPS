@@ -11,6 +11,7 @@
   </title>
   <!--     Fonts and icons     -->
   <link href="{{ asset('admin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+
   <link href="{{ asset('admin/bootstrap/dataTables.min.js')}}" rel="stylesheet" />
   <link href="{{ asset('admin/bootstrap/jquery-3.7.0.js')}}" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -59,7 +60,7 @@
             </a>
           </li>
         <li class="nav-item">
-            <a class="nav-link text-white " href="{{ asset('pages/rtl.html')}}">
+            <a class="nav-link text-white " href="{{ route('events.eventList') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>
@@ -67,7 +68,7 @@
             </a>
           </li>
         <li class="nav-item">
-            <a class="nav-link text-white " href="{{ asset('pages/rtl.html')}}">
+            <a class="nav-link text-white " href="{{ route('donations.donationList') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"></i>
               </div>

@@ -17,6 +17,7 @@ class UsersController extends Controller
 
     public function userProfile($id=null)
     {
+        $id = Auth::guard('user')->user()->id;
         $users= DB::table('users as u')->select(
             'c.name as country_name',
             'u.name',
@@ -32,6 +33,7 @@ class UsersController extends Controller
         ->where('u.id', $id)
         ->where('u.data_status','<>',0)
         ->orderBy('u.id','asc')->first();
+        // dd($users);
         return view('users.users_profile', compact('users'));
     }
 
@@ -39,10 +41,8 @@ class UsersController extends Controller
     public function createUser()
     {
         $countries = DB::table('ref_country')->get();
-        $programs = DB::table('programs')->get();
-        $events = DB::table('events')->get();
 
-        return view('users.create', ['countries' =>$countries,'programs' =>$programs,'events' =>$events]);
+        return view('users.create', ['countries' =>$countries]);
     }
 
 
@@ -86,7 +86,7 @@ class UsersController extends Controller
         $User->street = $request->input('street');
         $User->image = $imageName;
         $User->save();
-    
+
         return redirect()->route('users.userProfile')->with('success','User has been created successfully.');
     }
 
